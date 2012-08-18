@@ -14,3 +14,4 @@ INSTALL
 
 As it has code for both hostmaster and drush it needs to be in both a modules directory of the hostmaster site and a directory where drush looks e.g. ~/.drush/. The module can be placed in both directories or symlinked.
 
+Registry-rebuild required the equally named drush module, installable with e.g. drush dl registry-rebuild
