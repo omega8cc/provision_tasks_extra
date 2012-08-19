@@ -19,6 +19,10 @@ function hosting_tasks_extra_drush_command() {
     'description' => 'Rebuilds the registry and flushes all caches on the site.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
+  $items['provision-run_cron'] = array(
+    'description' => 'Runs cron on the site.',
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
 
   return $items;
 }
@@ -41,3 +45,11 @@ function drush_hosting_tasks_extra_provision_rebuild_registry() {
   drush_log(dt('Rebuilt registry and caches cleared with debugging enabled'));
 }
 
+/**
+ * Implements the provision-run_cron command.
+ */
+function drush_hosting_tasks_extra_provision_run_cron() {
+  drush_errors_on();
+  provision_backend_invoke(d()->name, 'core-cron -d');
+  drush_log(dt('Cron run with debugging enabled'));
+}

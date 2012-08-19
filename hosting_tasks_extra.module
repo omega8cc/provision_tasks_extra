@@ -14,6 +14,10 @@ function hosting_tasks_extra_hosting_tasks() {
     'title' => t('Rebuild registry'),
     'description' => t('Rebuilds the registry and flushes all caches on the site.'),
   );
+  $tasks['site']['run_cron'] = array(
+    'title' => t('Run cron'),
+    'description' => t('Runs cron on the site.'),
+  );
 
   return $tasks;
 }
@@ -26,6 +30,7 @@ function hosting_tasks_extra_perm() {
   return array(
     'create rebuild_registry task',
     'create flush_cache task',
+    'create run_cron task',
   );
 }
 
