@@ -7,12 +7,12 @@ function hosting_tasks_extra_hosting_tasks() {
   $tasks = array();
 
   $tasks['site']['flush_cache'] = array(
-    'title' => t('Flush cache'),
-    'description' => t('Flushes cache on the site.'),
+    'title' => t('Flush all caches'),
+    'description' => t('Flushes all caches on the site.'),
   );
   $tasks['site']['rebuild_registry'] = array(
-    'title' => t('Rebuild Registry'),
-    'description' => t('Rebuilds the registry on the site.'),
+    'title' => t('Rebuild registry'),
+    'description' => t('Rebuilds the registry and flushes all caches on the site.'),
   );
 
   return $tasks;
