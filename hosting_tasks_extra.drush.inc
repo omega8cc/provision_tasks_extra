@@ -27,8 +27,8 @@ function hosting_tasks_extra_drush_command() {
  * Implements the provision-flush_cache command.
  */
 function drush_hosting_tasks_extra_provision_flush_cache() {
-  $site_path = d()->site_path;
-  drush_shell_cd_and_exec($site_path, 'drush cache-clear all -d');
+  drush_errors_on();
+  provision_backend_invoke(d()->name, 'cache-clear all -d');
   drush_log(dt('All caches cleared with debugging enabled'));
 }
 
@@ -36,8 +36,8 @@ function drush_hosting_tasks_extra_provision_flush_cache() {
  * Implements the provision-rebuild_registry command.
  */
 function drush_hosting_tasks_extra_provision_rebuild_registry() {
-  $site_path = d()->site_path;
-  drush_shell_cd_and_exec($site_path, 'drush registry-rebuild -d');
+  drush_errors_on();
+  provision_backend_invoke(d()->name, 'registry-rebuild -d');
   drush_log(dt('Rebuilt registry and caches cleared with debugging enabled'));
 }
 
