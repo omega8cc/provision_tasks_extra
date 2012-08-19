@@ -3,6 +3,8 @@ Provision tasks extra
 
 This code extends Aegir back-end with some additional commands.
 
+Forked from http://drupal.org/project/hosting_tasks_extra
+
 Supported commands are:
 
 - drush cache-clear -d
