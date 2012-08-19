@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Provision/Drush hooks for the hosting_tasks_extra module.
+ * Provision/Drush hooks for the provision_tasks_extra module.
  *
  * These are the hooks that will be executed by the drush_invoke function.
  */
@@ -10,7 +10,7 @@
 /**
  * Implementation of hook_drush_command().
  */
-function hosting_tasks_extra_drush_command() {
+function provision_tasks_extra_drush_command() {
   $items['provision-flush_cache'] = array(
     'description' => 'Flushes all caches on the site.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
@@ -30,7 +30,7 @@ function hosting_tasks_extra_drush_command() {
 /**
  * Implements the provision-flush_cache command.
  */
-function drush_hosting_tasks_extra_provision_flush_cache() {
+function drush_provision_tasks_extra_provision_flush_cache() {
   drush_errors_on();
   provision_backend_invoke(d()->name, 'cache-clear all -d');
   drush_log(dt('All caches cleared with debugging enabled'));
@@ -39,7 +39,7 @@ function drush_hosting_tasks_extra_provision_flush_cache() {
 /**
  * Implements the provision-rebuild_registry command.
  */
-function drush_hosting_tasks_extra_provision_rebuild_registry() {
+function drush_provision_tasks_extra_provision_rebuild_registry() {
   drush_errors_on();
   provision_backend_invoke(d()->name, 'registry-rebuild -d');
   drush_log(dt('Rebuilt registry and caches cleared with debugging enabled'));
@@ -48,7 +48,7 @@ function drush_hosting_tasks_extra_provision_rebuild_registry() {
 /**
  * Implements the provision-run_cron command.
  */
-function drush_hosting_tasks_extra_provision_run_cron() {
+function drush_provision_tasks_extra_provision_run_cron() {
   drush_errors_on();
   provision_backend_invoke(d()->name, 'core-cron -d');
   drush_log(dt('Cron run with debugging enabled'));
