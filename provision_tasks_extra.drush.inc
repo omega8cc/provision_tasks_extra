@@ -41,13 +41,8 @@ function drush_provision_tasks_extra_provision_flush_cache() {
  */
 function drush_provision_tasks_extra_provision_rebuild_registry() {
   drush_errors_on();
-  if (drush_drupal_major_version() <= 7) {
-    provision_backend_invoke(d()->name, 'registry-rebuild -d');
-    drush_log(dt('Rebuilt registry and caches cleared with debugging enabled'));
-  }
-  else {
-    drush_log(dt('Rebuilt registry not supported in Drupal 8, yet'));
-  }
+  provision_backend_invoke(d()->name, 'registry-rebuild -d');
+  drush_log(dt('Rebuilt registry and caches cleared with debugging enabled'));
 }
 
 /**
