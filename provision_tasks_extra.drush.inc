@@ -23,6 +23,10 @@ function provision_tasks_extra_drush_command() {
     'description' => 'Runs cron on the site.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
+  $items['provision-force_rebuild_registry'] = array(
+    'description' => t('Truncates registry and registry_file tables and rebuilds them from scratch.'),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
 
   return $items;
 }
@@ -52,4 +56,13 @@ function drush_provision_tasks_extra_provision_run_cron() {
   drush_errors_on();
   provision_backend_invoke(d()->name, 'core-cron -d');
   drush_log(dt('Cron run with debugging enabled'));
+}
+
+/**
+ * Implements the provision-force_rebuild_registry command.
+ */
+function drush_provision_tasks_extra_provision_force_rebuild_registry() {
+  drush_errors_on();
+  provision_backend_invoke(d()->name, 'registry-rebuild --fire-bazooka -d');
+  drush_log(dt('Registry and registry_file tables rebuilt from scratch'));
 }
