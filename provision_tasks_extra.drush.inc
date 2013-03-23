@@ -24,7 +24,7 @@ function provision_tasks_extra_drush_command() {
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
   $items['provision-force_rebuild_registry'] = array(
-    'description' => t('Truncates registry and registry_file tables and rebuilds them from scratch.'),
+    'description' => 'Truncates registry and registry_file tables and rebuilds them from scratch.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
 
