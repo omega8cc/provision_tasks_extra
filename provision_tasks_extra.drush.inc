@@ -63,6 +63,11 @@ function drush_provision_tasks_extra_provision_run_cron() {
  */
 function drush_provision_tasks_extra_provision_force_rebuild_registry() {
   drush_errors_on();
-  provision_backend_invoke(d()->name, 'registry-rebuild --fire-bazooka -d');
-  drush_log(dt('Registry and registry_file tables rebuilt from scratch'));
+  if (drush_drupal_major_version() == 7) {
+    provision_backend_invoke(d()->name, 'registry-rebuild --fire-bazooka -d');
+    drush_log(dt('Registry and registry_file tables rebuilt from scratch'));
+  }
+  else {
+    drush_log(dt('We are sorry, but this task works only for Drupal 7'));
+  }
 }
