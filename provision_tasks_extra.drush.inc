@@ -12,19 +12,19 @@
  */
 function provision_tasks_extra_drush_command() {
   $items['provision-flush_cache'] = array(
-    'description' => 'Flushes all caches on the site.',
+    'description' => 'Flushes all caches.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
   $items['provision-rebuild_registry'] = array(
-    'description' => 'Rebuilds the registry and flushes all caches on the site.',
+    'description' => 'Rebuilds the registry and flushes all caches.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
   $items['provision-run_cron'] = array(
-    'description' => 'Runs cron on the site.',
+    'description' => 'Runs standard cron.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
-  $items['provision-force_rebuild_registry'] = array(
-    'description' => 'Truncates registry and registry_file tables and rebuilds them from scratch.',
+  $items['provision-delete_rebuild_registry'] = array(
+    'description' => 'Truncates and re-creates registry tables.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
 
@@ -59,9 +59,9 @@ function drush_provision_tasks_extra_provision_run_cron() {
 }
 
 /**
- * Implements the provision-force_rebuild_registry command.
+ * Implements the provision-delete_rebuild_registry command.
  */
-function drush_provision_tasks_extra_provision_force_rebuild_registry() {
+function drush_provision_tasks_extra_provision_delete_rebuild_registry() {
   drush_errors_on();
   if (d()->type === 'site') {
     if (drush_drupal_major_version(d()->root) == 7) {
@@ -70,8 +70,7 @@ function drush_provision_tasks_extra_provision_force_rebuild_registry() {
     }
     else {
       $platform_root = d()->root;
-      drush_log(dt("We are sorry, but this task works only for Drupal 7"), 'warning');
-      drush_log(dt("This site platform root is @thisroot", array('@thisroot' => $platform_root)), 'warning');
+      drush_log(dt("This drush registry-rebuild --fire-bazooka -d task works only for Drupal 7 sites"), 'warning');
     }
   }
 }
