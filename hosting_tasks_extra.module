@@ -18,6 +18,11 @@ function hosting_tasks_extra_hosting_tasks() {
     'title' => t('Run cron'),
     'description' => t('Runs cron on the site.'),
   );
+  $tasks['site']['update'] = array(
+    'title' => t('Update'),
+    'description' => t('Run updates on this site.'),
+    'dialog' => TRUE,
+    );
 
   return $tasks;
 }
@@ -31,6 +36,7 @@ function hosting_tasks_extra_perm() {
     'create rebuild_registry task',
     'create flush_cache task',
     'create run_cron task',
+    'create update task',
   );
 }
 

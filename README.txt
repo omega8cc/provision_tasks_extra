@@ -1,13 +1,14 @@
 Hosting tasks extra
 =====================
 
-This module extends Aegit front-end with some additional tasks.
+This module extends Aegir's front-end with some additional tasks.
 
 Supported tasks/commands are:
 
 - Flush all caches (drush cache-clear -d)
 - Rebuild registry (drush registry-rebuild -d)
 - Run cron (drush core-cron -d)
+- Run updates (drush updatedb -d)
 
 
 INSTALL
