@@ -22,7 +22,7 @@ of your Aegir backend:
 
   http://drupal.org/project/provision_tasks_extra
 
-In addition, for 'Rebuild registry', you will need to install an addtional
+In addition, for 'Rebuild registry', you will need to install an additional
 Drush extension:
 
   http://drupal.org/project/registry_rebuild
