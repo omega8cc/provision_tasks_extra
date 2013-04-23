@@ -1,27 +1,26 @@
 Provision tasks extra
 =====================
 
-This code extends Aegir back-end with some additional commands.
+This code extends Aegir's back-end with some additional commands.
 
 Supported commands are:
 
 - drush cache-clear -d
 - drush registry-rebuild -d
 - drush core-cron -d
+- drush updatedb -d
 
-Code: https://github.com/omega8cc/provision_tasks_extra
+INSTALLATION
+------------
 
-
-INSTALL
-=================
 This code is for provision, so it needs to be uploaded
 in the ~/.drush/ directory of your Aegir backend.
 
 You will need hosting_tasks_extra module uploaded
 in the modules directory of the hostmaster platform
-to be able to use this extension:
+to be able to use this extension from the frontend:
 
-https://github.com/omega8cc/hosting_tasks_extra
+http://drupal.org/project/hosting_tasks_extra
 
 Requires registry-rebuild Drush extension uploaded
 also in the ~/.drush/ directory of your Aegir backend.
