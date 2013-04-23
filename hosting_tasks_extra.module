@@ -22,7 +22,11 @@ function hosting_tasks_extra_hosting_tasks() {
     'title' => t('Update'),
     'description' => t('Run updates on this site.'),
     'dialog' => TRUE,
-    );
+  );
+  $tasks['server']['flush_drush_cache'] = array(
+    'title' => t('Flush Drush cache'),
+    'description' => t('Flush the Drush cache on this (web) server.'),
+  );
 
   return $tasks;
 }
@@ -37,6 +41,7 @@ function hosting_tasks_extra_perm() {
     'create flush_cache task',
     'create run_cron task',
     'create update task',
+    'create flush_drush_cache task',
   );
 }
 

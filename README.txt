@@ -9,6 +9,7 @@ Supported tasks/commands are:
 - Rebuild registry (drush registry-rebuild -d)
 - Run cron (drush core-cron -d)
 - Run updates (drush updatedb -d)
+- Flush the Drush cache (drush clear-cache drush -d)
 
 
 INSTALL
