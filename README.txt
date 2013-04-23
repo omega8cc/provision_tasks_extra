@@ -9,6 +9,7 @@ Supported commands are:
 - drush registry-rebuild -d
 - drush core-cron -d
 - drush updatedb -d
+- drush cache-clear drush -d
 
 INSTALLATION
 ------------

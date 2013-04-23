@@ -27,6 +27,10 @@ function provision_tasks_extra_drush_command() {
     'description' => dt('Run updates on a site'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
+  $items['provision-flush_drush_cache'] = array(
+    'description' => 'Flush the Drush cache on the server.',
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
 
   return $items;
 }
@@ -102,4 +106,14 @@ function drush_provision_tasks_extra_provision_update_rollback() {
     drush_unset_option('force');
   }
 }
+
+/**
+ * Implements the provision-flush_drush_cache command.
+ */
+function drush_provision_tasks_extra_provision_flush_drush_cache() {
+  drush_errors_on();
+  provision_backend_invoke(d()->name, 'cache-clear drush -d');
+  drush_log(dt('Cleared the Drush cache cleared with debugging enabled'));
+}
+
 
