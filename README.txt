@@ -1,5 +1,5 @@
 Hosting tasks extra
-=====================
+===================
 
 This module extends Aegir's front-end with some additional tasks.
 
@@ -12,9 +12,18 @@ Supported tasks/commands are:
 
 
 INSTALL
-=================
-This code is for hostmaster it needs to be uploaded
-in the modules directory of the hostmaster platform.
+-------
 
-It requires provision_tasks_extra exstension uploaded
-in the ~/.drush/ directory of your Aegir backend.
+This code is for hostmaster and needs to be uploaded in the modules directory
+of the hostmaster platform.
+
+It requires provision_tasks_extra extension uploaded in the ~/.drush/ directory
+of your Aegir backend:
+
+  http://drupal.org/project/provision_tasks_extra
+
+In addition, for 'Rebuild registry', you will need to install an addtional
+Drush extension:
+
+  http://drupal.org/project/registry_rebuild
+
