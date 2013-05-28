@@ -15,11 +15,9 @@ Installation
 ------------
 
 There are two parts to the code:
-- A Drupal module for hostmaster - contained in the /hosting directory. Install
+- A Drupal module for hostmaster - packaged with hosting_tasks_extra. Install
   this like any other Drupal module into you hostmaster site.
-- A provision Drush script - contained in the /provision directory. Copy this
-  into /var/aegir/.drush/aegir_http_basic/ on your Aegir master
-   server.
+- A provision Drush script - packaged with provision_tasks_extra.
 - Aegir sometimes struggles to set the correct permissions on some directories
   that might stop your site from working. Make sure that
   `/var/aegir/config/server_NAME/apache` is executable by 'others', which just
@@ -45,3 +43,8 @@ server, so you should not use any secure passwords for this. Also, HTTP Basic
 authentication is sent over the internet as plain text, so you really shouldn't
 be using passwords you want to keep secret.
 This module is just to stop most people from accessing a site.
+
+History
+-------
+
+This module was originally hosted on https://github.com/computerminds/aegir_http_basic (before 6.x-2.x)
