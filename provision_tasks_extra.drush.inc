@@ -40,7 +40,7 @@ function provision_tasks_extra_drush_command() {
  */
 function drush_provision_tasks_extra_provision_flush_cache() {
   drush_errors_on();
-  provision_backend_invoke(d()->name, 'cache-clear all -d');
+  provision_backend_invoke(d()->name, 'cache-clear all');
   drush_log(dt('All caches cleared with debugging enabled'));
 }
 
@@ -49,7 +49,7 @@ function drush_provision_tasks_extra_provision_flush_cache() {
  */
 function drush_provision_tasks_extra_provision_rebuild_registry() {
   drush_errors_on();
-  provision_backend_invoke(d()->name, 'registry-rebuild -d');
+  provision_backend_invoke(d()->name, 'registry-rebuild');
   drush_log(dt('Rebuilt registry and caches cleared with debugging enabled'));
 }
 
@@ -58,7 +58,7 @@ function drush_provision_tasks_extra_provision_rebuild_registry() {
  */
 function drush_provision_tasks_extra_provision_run_cron() {
   drush_errors_on();
-  provision_backend_invoke(d()->name, 'core-cron -d');
+  provision_backend_invoke(d()->name, 'core-cron');
   drush_log(dt('Cron run with debugging enabled'));
 }
 
@@ -67,7 +67,7 @@ function drush_provision_tasks_extra_provision_run_cron() {
  */
 function drush_provision_tasks_extra_provision_update() {
   drush_errors_on();
-  provision_backend_invoke(d()->name, 'updatedb -d');
+  provision_backend_invoke(d()->name, 'updatedb');
   drush_log(dt('Ran updates with debugging enabled'));
 }
 
@@ -112,7 +112,7 @@ function drush_provision_tasks_extra_provision_update_rollback() {
  */
 function drush_provision_tasks_extra_provision_flush_drush_cache() {
   drush_errors_on();
-  provision_backend_invoke(d()->name, 'cache-clear drush -d');
+  provision_backend_invoke(d()->name, 'cache-clear drush');
   drush_log(dt('Cleared the Drush cache cleared with debugging enabled'));
 }
 
