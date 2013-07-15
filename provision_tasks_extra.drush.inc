@@ -95,3 +95,22 @@ function drush_provision_tasks_extra_provision_site_security_check() {
   provision_backend_invoke(d()->name, 'dis update -y');
   drush_log(dt('Update module disabled'));
 }
+
+/**
+ * Implements the provision-site_security_review command.
+ */
+function drush_provision_tasks_extra_provision_site_security_review() {
+  drush_errors_on();
+  provision_backend_invoke(d()->name, 'en update -y');
+  drush_log(dt('Update module enabled temporarily'));
+  provision_backend_invoke(d()->name, 'en security_review -y');
+  drush_log(dt('Security Review module enabled temporarily'));
+  provision_backend_invoke(d()->name, 'secrev -d');
+  drush_log(dt('Security Review completed'));
+  provision_backend_invoke(d()->name, 'dis update -y');
+  drush_log(dt('Update module disabled'));
+  provision_backend_invoke(d()->name, 'dis security_review -y');
+  drush_log(dt('Security Review module disabled'));
+}
+
+
