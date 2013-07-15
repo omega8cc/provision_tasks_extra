@@ -27,6 +27,10 @@ function provision_tasks_extra_drush_command() {
     'description' => 'Truncates and re-creates registry tables.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
+  $items['provision-site_security_check'] = array(
+    'description' => 'Checks basic site security settings.',
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
 
   return $items;
 }
@@ -73,4 +77,13 @@ function drush_provision_tasks_extra_provision_delete_rebuild_registry() {
       drush_log(dt("This drush registry-rebuild --fire-bazooka -d task works only for Drupal 7 sites"), 'warning');
     }
   }
+}
+
+/**
+ * Implements the provision-site_security_check command.
+ */
+function drush_provision_tasks_extra_provision_site_security_check() {
+  drush_errors_on();
+  provision_backend_invoke(d()->name, 'secchk -d');
+  drush_log(dt('Basic site security settings checked'));
 }
