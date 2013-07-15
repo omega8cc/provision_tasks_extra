@@ -88,10 +88,10 @@ function drush_provision_tasks_extra_provision_delete_rebuild_registry() {
  */
 function drush_provision_tasks_extra_provision_site_security_check() {
   drush_errors_on();
-  provision_backend_invoke(d()->name, 'en update');
+  provision_backend_invoke(d()->name, 'en update -y');
   drush_log(dt('Update module enabled temporarily'));
   provision_backend_invoke(d()->name, 'secchk -d');
   drush_log(dt('Basic site security checked'));
-  provision_backend_invoke(d()->name, 'dis update');
+  provision_backend_invoke(d()->name, 'dis update -y');
   drush_log(dt('Update module disabled'));
 }
