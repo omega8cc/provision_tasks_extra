@@ -28,7 +28,7 @@ function provision_tasks_extra_drush_command() {
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
   $items['provision-site_security_check'] = array(
-    'description' => 'Checks basic site security settings.',
+    'description' => 'Checks basic site security.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
 
@@ -84,6 +84,10 @@ function drush_provision_tasks_extra_provision_delete_rebuild_registry() {
  */
 function drush_provision_tasks_extra_provision_site_security_check() {
   drush_errors_on();
+  provision_backend_invoke(d()->name, 'en update');
+  drush_log(dt('Update module enabled temporarily'));
   provision_backend_invoke(d()->name, 'secchk -d');
-  drush_log(dt('Basic site security settings checked'));
+  drush_log(dt('Basic site security checked'));
+  provision_backend_invoke(d()->name, 'dis update');
+  drush_log(dt('Update module disabled'));
 }
