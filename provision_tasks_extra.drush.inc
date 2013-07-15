@@ -28,7 +28,11 @@ function provision_tasks_extra_drush_command() {
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
   $items['provision-site_security_check'] = array(
-    'description' => 'Checks basic site security.',
+    'description' => 'Checks site security.',
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
+  $items['provision-site_security_review'] = array(
+    'description' => 'Runs Security Review.',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
   );
 
