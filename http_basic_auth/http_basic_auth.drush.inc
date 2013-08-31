@@ -1,14 +1,21 @@
 <?php
 
-//include_once(dirname(__FILE__) . '/../provision.service.inc');
+/**
+ * Implements hook_drush_init().
+ */
+function http_basic_auth_drush_init() {
+  http_basic_auth_provision_register_autoload();
+}
 
 /**
- * Implements hook_drush_init()
+ * Register our directory as a place to find provision classes.
  */
-function http_basic_auth_drush_init(){
-  $list = drush_commandfile_list();
-  $provision_drush_inc = $list['provision'];
-  include_once($provision_drush_inc);
+function http_basic_auth_provision_register_autoload() {
+  static $loaded = FALSE;
+  if (!$loaded) {
+    $loaded = TRUE;
+    provision_autoload_register_prefix('Provision_', dirname(__FILE__));
+  }
 }
 
 /**
@@ -18,23 +25,8 @@ function http_basic_auth_drush_init(){
  *   An array with the service type the key, and the default implementation the value.
  */
 function http_basic_auth_provision_services() {
+  http_basic_auth_provision_register_autoload();
   return array('http_basic_auth' => NULL);
-}
-
-/**
- * The http_basic_auth service base class.
- */
-class Provision_Service_http_basic_auth extends Provision_Service {
-  public $service = 'http_basic_auth';
-
-  /**
-   * Add the needed properties to the site context.
-   */
-  static function subscribe_site($context) {
-    $context->setProperty('http_basic_auth_username');
-    $context->setProperty('http_basic_auth_password');
-    $context->setProperty('http_basic_auth_message');
-  }
 }
 
 function _http_basic_auth_create_file($uri, $data, $user, $pass) {
