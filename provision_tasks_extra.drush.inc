@@ -77,8 +77,16 @@ function drush_provision_tasks_extra_provision_update() {
  * Make a backup of the site before we mess with it.
  */
 function drush_provision_tasks_extra_provision_update_pre_validate() {
-  $backup_file = d()->platform->server->backup_path . '/' . d()->uri . '-pre-update-' . date("Ymd.His", time()) . '.tar.gz';
+  /* Set offline mode to true and re-generate the settings.php. This will write a
+   * $conf['site_offline'] = 1; to the settings.php
+   */
+  drush_log(dt("Putting site under maintenance"));
+  d()->site_enabled = FALSE;
+  _provision_drupal_create_settings_file();
+  provision_drupal_push_site();
+
   // Ensure a unique backup file is used.
+  $backup_file = d()->platform->server->backup_path . '/' . d()->uri . '-pre-update-' . date("Ymd.His", time()) . '.tar.gz';
   $count = 0;
   while (is_file($backup_file)) {
     $count++;
@@ -105,6 +113,23 @@ function drush_provision_tasks_extra_provision_update_rollback() {
     drush_invoke_process('@self', 'provision-restore', array($restore_file));
     drush_unset_option('force');
   }
+
+  // Set site_offline to false and regenerate the config
+  drush_log(dt("Bringing site out of maintenance"));
+  d()->site_enabled = true;
+  _provision_drupal_create_settings_file();
+  provision_drupal_push_site();
+}
+
+/**
+ * Implements drush_hook_post_COMMAND().
+ */
+function drush_provision_tasks_extra_post_provision_update() {
+  // Set site_offline to false and regenerate the config
+  drush_log(dt("Bringing site out of maintenance"));
+  d()->site_enabled = true;
+  _provision_drupal_create_settings_file();
+  provision_drupal_push_site();
 }
 
 /**
