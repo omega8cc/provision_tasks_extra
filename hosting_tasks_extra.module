@@ -45,3 +45,34 @@ function hosting_tasks_extra_perm() {
   );
 }
 
+/**
+ * Implements hosting_task_TASK_TYPE_form().
+ */
+function hosting_task_update_form($node) {
+  // Gather a list of operations to execute.
+  $all_ops = module_invoke_all('hosting_task_update_ops');
+  uasort($all_ops, 'element_sort');
+  $value = '<div>The following operations will be executed on <em>' . $node->title . '</em>:<br /><ul>';
+  foreach ($all_ops as $item) {
+    $value .= '<li>' . $item['#description'] . '</li>';
+  }
+  $value .= '</ul></div>';
+  $form['operations'] = array(
+    '#value' => $value,
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_hosting_task_update_ops().
+ *
+ * @see: hosting_task_update_form().
+ */
+function hosting_tasks_extra_hosting_task_update_ops() {
+  return array(
+    'site update' => array(
+      '#description' => 'Run site updates (update.php).',
+      '#weight' => 0,
+    )
+  );
+}
