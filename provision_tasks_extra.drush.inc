@@ -12,23 +12,23 @@
  */
 function provision_tasks_extra_drush_command() {
   $items['provision-flush_cache'] = array(
-    'description' => 'Flushes all caches on the site.',
+    'description' => 'Flushes all caches on a site',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
   $items['provision-rebuild_registry'] = array(
-    'description' => 'Rebuilds the registry and flushes all caches on the site.',
+    'description' => 'Rebuilds the registry on a site',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
   $items['provision-run_cron'] = array(
-    'description' => 'Runs cron on the site.',
+    'description' => 'Runs cron on a site',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
   $items['provision-update'] = array(
-    'description' => dt('Run updates on a site'),
+    'description' => dt('Runs updates on a site'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
   $items['provision-flush_drush_cache'] = array(
-    'description' => 'Flush the Drush cache on the server.',
+    'description' => 'Flushes the Drush cache on the server',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
 
