@@ -24,7 +24,7 @@ function provision_tasks_extra_drush_command() {
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
   $items['provision-update'] = array(
-    'description' => dt('Runs updates on a site'),
+    'description' => dt('Runs db updates on a site'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
   $items['provision-flush_drush_cache'] = array(
@@ -41,7 +41,7 @@ function provision_tasks_extra_drush_command() {
 function drush_provision_tasks_extra_provision_flush_cache() {
   drush_errors_on();
   provision_backend_invoke(d()->name, 'cache-clear all');
-  drush_log(dt('All caches cleared with debugging enabled'));
+  drush_log(dt('All caches cleared'));
 }
 
 /**
@@ -52,7 +52,7 @@ function drush_provision_tasks_extra_provision_rebuild_registry() {
   if (d()->type === 'site') {
     if (drush_drupal_major_version(d()->root) == 7) {
       provision_backend_invoke(d()->name, 'registry-rebuild --fire-bazooka');
-      drush_log(dt('Both registry and registry_file tables rebuilt'));
+      drush_log(dt('Both registry and registry_file rebuilt'));
     }
     else {
       provision_backend_invoke(d()->name, 'registry-rebuild');
@@ -67,7 +67,7 @@ function drush_provision_tasks_extra_provision_rebuild_registry() {
 function drush_provision_tasks_extra_provision_run_cron() {
   drush_errors_on();
   provision_backend_invoke(d()->name, 'core-cron');
-  drush_log(dt('Cron run with debugging enabled'));
+  drush_log(dt('Drush core-cron task completed'));
 }
 
 /**
@@ -76,7 +76,7 @@ function drush_provision_tasks_extra_provision_run_cron() {
 function drush_provision_tasks_extra_provision_update() {
   drush_errors_on();
   provision_backend_invoke(d()->name, 'updatedb');
-  drush_log(dt('Ran updates with debugging enabled'));
+  drush_log(dt('Drush updatedb task completed'));
 }
 
 /**
@@ -88,7 +88,7 @@ function drush_provision_tasks_extra_provision_update_pre_validate() {
   /* Set offline mode to true and re-generate the settings.php. This will write a
    * $conf['site_offline'] = 1; to the settings.php
    */
-  drush_log(dt("Putting site under maintenance"));
+  drush_log(dt("Putting the site under maintenance"));
   d()->site_enabled = FALSE;
   _provision_drupal_create_settings_file();
   provision_drupal_push_site();
@@ -123,8 +123,8 @@ function drush_provision_tasks_extra_provision_update_rollback() {
   }
 
   // Set site_offline to false and regenerate the config
-  drush_log(dt("Bringing site out of maintenance"));
-  d()->site_enabled = true;
+  drush_log(dt("Bringing the site out of maintenance"));
+  d()->site_enabled = TRUE;
   _provision_drupal_create_settings_file();
   provision_drupal_push_site();
 }
@@ -134,8 +134,8 @@ function drush_provision_tasks_extra_provision_update_rollback() {
  */
 function drush_provision_tasks_extra_post_provision_update() {
   // Set site_offline to false and regenerate the config
-  drush_log(dt("Bringing site out of maintenance"));
-  d()->site_enabled = true;
+  drush_log(dt("Bringing the site out of maintenance"));
+  d()->site_enabled = TRUE;
   _provision_drupal_create_settings_file();
   provision_drupal_push_site();
 }
@@ -146,7 +146,7 @@ function drush_provision_tasks_extra_post_provision_update() {
 function drush_provision_tasks_extra_provision_flush_drush_cache() {
   drush_errors_on();
   provision_backend_invoke(d()->name, 'cache-clear drush');
-  drush_log(dt('Cleared the Drush cache cleared with debugging enabled'));
+  drush_log(dt('Drush cache on the server cleared'));
 }
 
 
