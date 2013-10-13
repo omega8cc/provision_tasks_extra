@@ -49,8 +49,16 @@ function drush_provision_tasks_extra_provision_flush_cache() {
  */
 function drush_provision_tasks_extra_provision_rebuild_registry() {
   drush_errors_on();
-  provision_backend_invoke(d()->name, 'registry-rebuild');
-  drush_log(dt('Rebuilt registry and caches cleared with debugging enabled'));
+  if (d()->type === 'site') {
+    if (drush_drupal_major_version(d()->root) == 7) {
+      provision_backend_invoke(d()->name, 'registry-rebuild --fire-bazooka');
+      drush_log(dt('Both registry and registry_file tables rebuilt'));
+    }
+    else {
+      provision_backend_invoke(d()->name, 'registry-rebuild');
+      drush_log(dt('Registry rebuilt and all caches cleared'));
+    }
+  }
 }
 
 /**
