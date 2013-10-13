@@ -5,11 +5,12 @@ This code extends Aegir's back-end with some additional commands.
 
 Supported commands are:
 
-- drush cache-clear -d
-- drush registry-rebuild -d
-- drush core-cron -d
-- drush updatedb -d
-- drush cache-clear drush -d
+- drush cache-clear
+- drush cache-clear drush
+- drush core-cron
+- drush registry-rebuild
+- drush registry-rebuild --fire-bazooka (Drupal 7 only)
+- drush updatedb
 
 INSTALLATION
 ------------
@@ -23,7 +24,7 @@ to be able to use this extension from the frontend:
 
 http://drupal.org/project/hosting_tasks_extra
 
-Requires registry-rebuild Drush extension uploaded
+Requires registry_rebuild Drush extension uploaded
 also in the ~/.drush/ directory of your Aegir backend.
 
 http://drupal.org/project/registry_rebuild
