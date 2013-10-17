@@ -7,10 +7,14 @@ Supported commands are:
 
 - drush cache-clear
 - drush cache-clear drush
+- drush clean-modules (via site_health_check, requires http://drupal.org/project/clean_missing_modules)
 - drush core-cron
+- drush pm-updatestatus (via site_health_check, requires Drush 6)
 - drush registry-rebuild
-- drush registry-rebuild --fire-bazooka (Drupal 7 only)
+- drush security-review (via site_health_check, requires http://drupal.org/project/security_review)
+- drush status-report (via site_health_check, requires Drush 5)
 - drush updatedb
+- drush updatedb-status (via site_health_check, requires Drush 6)
 
 INSTALLATION
 ------------
@@ -28,4 +32,3 @@ Requires registry_rebuild Drush extension uploaded
 also in the ~/.drush/ directory of your Aegir backend.
 
 http://drupal.org/project/registry_rebuild
-

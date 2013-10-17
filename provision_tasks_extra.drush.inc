@@ -31,8 +31,58 @@ function provision_tasks_extra_drush_command() {
     'description' => 'Flushes the Drush cache on the server',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
   );
+  $items['provision-site_health_check'] = array(
+    'description' => 'Runs health check on a site',
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH
+  );
 
   return $items;
+}
+
+/**
+ * Implements the provision-site_health_check command.
+ */
+function drush_provision_tasks_extra_provision_site_health_check() {
+  drush_errors_on();
+  $sitename = d()->name;
+  $dmv = DRUSH_MAJOR_VERSION;
+  drush_log(dt("This is Drush major version: %dmv", array('%dmv' => $dmv)), 'notice');
+  drush_shell_exec("drush6 $sitename en update -y");
+  $array = drush_shell_exec_output();
+  drush_log(dt($array), 'notice');
+  drush_log(dt('Health Check ###---### update module enabled temporarily'), 'success');
+
+  drush_log(dt('Health Check ###---### drush clean-modules ###---### start'), 'warning');
+  drush_shell_exec("drush6 $sitename clean-modules -y 2>&1");
+  $array = drush_shell_exec_output();
+  drush_log(dt($array), 'notice');
+
+  drush_log(dt('Health Check ###---### drush6 pm-updatestatus ###---### start'), 'warning');
+  drush_shell_exec("drush6 $sitename ups --field-labels 2>&1");
+  $array = drush_shell_exec_output();
+  drush_log(dt($array), 'notice');
+
+  drush_log(dt('Health Check ###---### drush6 status-report ###---### start'), 'warning');
+  drush_shell_exec("drush6 $sitename status-report --severity=2 2>&1");
+  $array = drush_shell_exec_output();
+  drush_log(dt($array), 'notice');
+
+  drush_log(dt('Health Check ###---### drush6 updatedb-status ###---### start'), 'warning');
+  drush_shell_exec("drush6 $sitename updatedb-status 2>&1");
+  $array = drush_shell_exec_output();
+  drush_log(dt($array), 'notice');
+
+  if (drush_drupal_major_version(d()->root) >= 7) {
+    drush_log(dt('Health Check ###---### drush security-review ###---### start'), 'warning');
+    drush_shell_exec("drush6 $sitename secrev --check=input_formats,field,error_reporting,query_errors,failed_logins,upload_extensions,admin_permissions,untrusted_php,temporary_files 2>&1");
+    $array = drush_shell_exec_output();
+    drush_log(dt($array), 'notice');
+  }
+
+  drush_shell_exec("drush6 $sitename dis update -y");
+  $array = drush_shell_exec_output();
+  drush_log(dt($array), 'notice');
+  drush_log(dt('Health Check ###---### update module disabled'), 'success');
 }
 
 /**
@@ -148,5 +198,3 @@ function drush_provision_tasks_extra_provision_flush_drush_cache() {
   provision_backend_invoke(d()->name, 'cache-clear drush');
   drush_log(dt('Drush cache on the server cleared'));
 }
-
-
