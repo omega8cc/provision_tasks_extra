@@ -63,7 +63,7 @@ function drush_provision_tasks_extra_provision_site_health_check() {
   drush_log(dt($array), 'notice');
 
   drush_log(dt('Health Check ###---### drush6 status-report ###---### start'), 'warning');
-  drush_shell_exec("drush6 $sitename status-report --severity=2 2>&1");
+  drush_shell_exec("drush6 $sitename status-report 2>&1");
   $array = drush_shell_exec_output();
   drush_log(dt($array), 'notice');
 
