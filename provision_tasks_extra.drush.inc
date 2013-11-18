@@ -80,6 +80,10 @@ function drush_provision_tasks_extra_provision_site_health_check() {
   }
 
   drush_log(dt('Health Check ###---### FIN'), 'success');
+
+  provision_file()->chmod(d()->site_path, 0755)
+    ->succeed('Changed permissions of <code>@path</code> to @perm')
+    ->fail('Could not change permissions of <code>@path</code> to @perm');
 }
 
 /**
