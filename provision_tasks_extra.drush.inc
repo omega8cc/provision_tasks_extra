@@ -52,7 +52,7 @@ function drush_provision_tasks_extra_provision_site_health_check() {
   drush_log(dt($array), 'notice');
   drush_log(dt('Health Check ###---### update module enabled temporarily'), 'success');
 
-  drush_log(dt('Health Check ###---### drush clean-modules ###---### start'), 'warning');
+  drush_log(dt('Health Check ###---### drush6 clean-modules ###---### start'), 'warning');
   drush_shell_exec("drush6 $sitename clean-modules -y 2>&1");
   $array = drush_shell_exec_output();
   drush_log(dt($array), 'notice');
@@ -73,7 +73,7 @@ function drush_provision_tasks_extra_provision_site_health_check() {
   drush_log(dt($array), 'notice');
 
   if (drush_drupal_major_version(d()->root) >= 7) {
-    drush_log(dt('Health Check ###---### drush security-review ###---### start'), 'warning');
+    drush_log(dt('Health Check ###---### drush6 security-review ###---### start'), 'warning');
     drush_shell_exec("drush6 $sitename secrev --check=input_formats,field,error_reporting,query_errors,failed_logins,upload_extensions,admin_permissions,untrusted_php,temporary_files 2>&1");
     $array = drush_shell_exec_output();
     drush_log(dt($array), 'notice');
